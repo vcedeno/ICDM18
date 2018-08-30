@@ -1,0 +1,92 @@
+\section{Notation and Problem Statement}
+\subsection{Notation}
+Table \ref{tab:notation} summarizes the major notations used in this and subsequent sections. 
+\begin{table}[!h]
+\centering
+    \caption{Notation}     
+    \label{tab:notation}
+    \begin{small}
+    \begin{tabular}{|ll|l}
+    \hline
+    {\bfseries Symbol} & {\bfseries  Description}      \\
+    \hline
+    $n$ & length of timeline  \\    \hline
+    $m$ & number of event types \\    \hline
+    $\epsilon=\{E_1,E_2,...,E_m\}$ & set $\epsilon$ of event types\\  \hline
+    $S$ & event sequence, $m \text{ x } n$ array \\    \hline
+    $S (i, t) = x$ & event $E_i$ has x occurrences at time $t$\\    \hline
+    $S = \{S_1,\dots ,S_k\}$ & summarized S with k segments \\    \hline
+    %$M = \{M_1,\dots ,M_k\}$ & local model for each of the k segments \\    \hline
+    $M_i = \{X_{i1},\dots ,X_{i\ell}\}$&groups of events in local model $M_i$\\    \hline
+    $I$ & interval $I \subseteq [1,n]$ \\    \hline
+    $S_i=S[I]$ & segment defined over interval $I$ \\    \hline
+    $n(E_j,I)$ & occurrences of $E_j$ at interval $I$ \\   \hline
+    $X_{ij}$& group in $M_i$ from segment $S_i$ \\   \hline
+    $\lambda(X_{ij})$ &average number of any event  \\  
+    &occurrence in group $X_{ij}$\\  \hline
+    $\lambda_{d}(X_{ij})$ &daily average number of any event \\  
+    &occurrence in group $X_{ij}$ \\    \hline
+    $LGM$ & Code length for the global model  \\    \hline
+    $LLM$ & Code length for the local model  \\    \hline
+    \end{tabular}
+    \end{small} 
+\end{table}
+
+We have a set $\epsilon$ of $m$ event types, $\epsilon=\{E_1,E_2,...,E_m\}$. A pair $(E,t)$, describes that the event $E$ occurs at time $t$. We have discrete timelines in the interval $[1,n]$, in which the occurrence times of events are positive integers. An event sequence can be denoted as $S$ and records the event occurrences during the time range $[1,n]$. $S$ can be denoted as an $m\text{ }x\text{ }n$ matrix, where $S(i,t)=x$ denotes that the event $E_i$ has a number of $x$ occurrences at time $t$. Given interval $I \subseteq [1,n]$, $S[I]$ is a segment defined over the time interval $I$. $S_i=S[I]$ and denotes the $m\text{ }x\text{ }|I|$ projection of $S$ on the interval $I$. The sum of the occurrences of $E_j$ in interval $I$ is denoted as $n(E_j,I)$.
+
+
+\subsection{Problem Statement}
+
+Given an event sequence $S$ and records of occurrences for the events $E_i \in S$ in the timeline $[1,n]$, find integer $k$ and a segmental grouping $M$ of $S=\{S_i,\dots,S_k\}$ with the best local model grouping $M_i$ for each $S_i$.
+We want our summarization to provide a global description that 1) shows how often do the events occur. 2) Shows how the frequency of occurrences change in the course of time. 3) Find related events that might provide an explanation for the changes in frequency.
+
+We want our model to segment the timeline and cluster event sequences based on their frequency of occurrence. Figure 
+\ref{fig:cuts} 
+shows the actual segmental grouping that our model finds for this event sequence. The model cuts the timeline in three segments [1,8], [9,17] and [18,30]. In the first segment, two groups consist of event sequences $\{E_1,E_2\}$ and $\{E_3\}$, respectively. In the same way the second segment groups $\{E_1,E_3,E_2\}$ and the third segment groups$\{E_1\}$ and $\{E_3,E_2\}$.
+
+\begin{figure}[h]
+%\scalebox{0.93}{
+\begin{tikzpicture}
+ \begin{axis}[
+ width=4.05in,
+xmin=1,
+xmax=31,
+ymin=0,
+ymax=0,
+ y=0.1cm,
+hide y axis,
+axis x line*=bottom,
+xtick={1,9,18,31},
+]
+\end{axis}
+\end{tikzpicture}
+
+\scalebox{0.389}{
+
+    \begin{tabular}{|cccccccc|ccccccccc|ccccccccccccc|}
+        \hline
+0&1&1&0&1&0&4&1&16&17&6&9&11&8&12&9&11&2&1&2&0&2&1&0&0&1&1&0&2&0\\\cline{18-30}
+1&1&0&0&0&2&1&0&11&15&11&9&9&3&8&13&6&12&27&17&26&26&18&30&21&20&28&22&23&17\\\cline{1-8}
+14&15&8&13&8&14&14&13&16&10&13&4&5&14&6&12&17&23&30&25&22&17&35&28&20&28&28&35&23&23\\\hline
+\multicolumn{20}{c}{}\\
+\multicolumn{8}{c}{$\{E_1,E_2\}\{E_3\}$}&\multicolumn{9}{c}{$\{E_1,E_3,E_2\}$}&\multicolumn{13}{c}{$\{E_1\}\{E_3,E_2\}$}\\
+    \end{tabular}
+    }
+
+
+ \caption{Visual representation of our event sequence summarization. Here n=30 and m=3. The model cuts the timeline in [1,8] grouping $\{E_1,E_2\}\{E_3\}$. Then cuts [9,17] grouping $\{E_1,E_3,E_2\}$. Finally it cuts [18,30] grouping $\{E_1\}\{E_3,E_2\}$.}
+\label{fig:cuts}
+\end{figure}
+
+The summarization of the event sequences partition $S$ into $k$ segments, $S=(S_1, S_2,..., S_k)$ where $0 <k \leq n$. After segmentations there are $k+1$ cuts, $\{c_1, c_2, ..., c_i, ...,c_{k+1}\}$ to represent the boundaries of the $k$ segments. Here, $c_1=1$, $c_{k+1}=n+1$ and the rest of the boundaries $c_j$ take values between $2\leq j \leq k$. A model $Mi$ partition the rows of $S_i$, clustering the event types in $\epsilon$ into $\ell$ groups $\{X_{i1},...,X_{i\ell}\}$ such that $X_{ij} \subseteq \epsilon$, $X_{ij} \cap X_{ij'}=\emptyset$ for every $j \neq j'$ and $1\leq j, j' \leq \ell$. For each group $X_{ij}$ the parameter $\lambda(X_{ij})$ will be defined as the average number of any event part of group $X_{ij}$ within the data segment $S_i$. $\lambda_{daily}(X_{ij})$ will be defined as the daily average number of any event, part of group $X_{ij}$, within the data segment $S_i$. $S (i, t) = x$ shows that event $E_i$ has x occurrences at time $t$, where $x\geq 0$. In Figure \ref{fig:cuts}, if $E_1$ represents the first row, $E_2$ represents the second row, and $E_3$ represents the third row; S(1,7)=4 and S(2,7)=1. $n(E_j,I)$ represents the number of occurrences of $E_j$ at interval I. In Figure \ref{fig:cuts}, if $I=[1,8]$ then $n(E_1,I)=8$ and $n(E_2,I)=5$. Also, if $I=[1,8]$ is represented by a local model with the following group of events, $M_1=\{X_{11}, X_{12}\}$, with $X_{11}=\{E_1, E_2\}$ and $X_{12}=\{E_3\}$; then $\lambda_d(X_{11})=\frac{n(E_1,I)+n(E_2,I)}{I * |X_{11}|}=\frac{13}{8*2}=0.81$, and $\lambda_d(X_{12})=\frac{n(E_3,I)}{I * |X_{12}|}=\frac{99}{8*1}=12.38$.
+
+\subsection{Challenges}
+\begin{enumerate}
+\item There is no generalization for any method describing binary values event sequences to be extended to discrete values event sequences.
+\item The problem statement defines a compressing pattern problem; giving sequence $S$, there are multiple window conditions, and for each condition a set of candidate patterns $\mathcal{M}$ is presented. Finding an optimal model for this definition is NP-Hard \cite{Lam:2014}.
+\item There is no optimal summarization for real world data.
+
+\end{enumerate}
+
+We provide solutions for these challenges in the subsequent sections, 1) Section \ref{sec:poisson}, 2) Section \ref{sec:time}, 3) Section \ref{sec:realdata}.
+

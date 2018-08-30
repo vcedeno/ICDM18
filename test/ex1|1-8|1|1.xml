@@ -1,0 +1,15 @@
+<summarization>
+<time_segment>
+<start_time>1</start_time>
+<end_time>8</end_time>
+<totalsegmentcost>24.364025</totalsegmentcost>
+<local_segment>
+<event_id>1</event_id>
+<event_id>2</event_id>
+<dailyrate>0.812500</dailyrate>
+<cost>20.898291</cost>
+</local_segment>
+<segmentcost>3.465736</segmentcost>
+</time_segment>
+<totalmodelcost>24.364025</totalmodelcost>
+</summarization>

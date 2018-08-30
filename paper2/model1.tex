@@ -1,0 +1,220 @@
+
+\section{Approach}
+
+
+\subsection{The global/local method for the summarization of  binary valued event sequence}
+The notion of a model for a given data $D$, broadly, has two components: a generative process $G$ and a model $m$.
+$G(m)$ typically defines a distribution $\mathcal D$ over a set of data items. The cost, $C$,  of the model is composed of
+the cost to represent $G$ and $m$, along the with the cost of ``error'' in observed data $D$ and
+the derived distribution $\mathcal D$. Now, the MDL is the minimum cost
+among the cost of all feasible models for $D$. 
+The Kolmogorov Complexity tells the language of choice to express $G$ and does not impact the MDL, i.e.,
+the ratio of cost to represent a given G across any  two languages is not a function of size of  $G$,
+but rather bounded by some constant. This implies that the MDL under a given language is also
+the MDL for any other language, modulo some fixed constant. However,
+even when the language of $G$ is fixed, finding MDL of any given data is intractable in general. 
+
+In~\cite{Kiernan:constructing}, the authors present an approach for finding MDL where the dataset
+is a collection of event sequences. They propose a generative process that is a natural fit for
+event sequences and a cost metric such that the model corresponding to the MDL, under 
+the proposed generative process and cost metric, yields a intuitive summarization of the input data.
+Furthermore, they propose a global/local dynamic programming method that computes the optimal model, i.e.,
+a model with MDL cost, in polynomial time.
+Next we describe the approach of~\cite{Kiernan:constructing} to obtain an optimal model for a given binary valued time series.
+We begin with a few additional notations.
+
+\paragraph{Optimal summarization through dynamic programming}
+Broadly,  any summarization of a given input $S$ consists of
+a global model with the segments $\{S_1,\dots ,S_k\}$
+and a local model $M_i$ for each segment $S_i$, where $M = \{M_1,\dots ,M_k\}$. The whole model has a cost which is the value that takes to represent it, this is the code Length of the Global Model (LGM).
+The optimal summarization is the model with least cost for the code LGM, i.e.,
+\begin{equation} LGM(S) = M = arg \mathop{min}_{M} \{L(M)+\sum_{i=1}^{k}L(S_i|M_i)\} \label{eq:lgm} \end{equation}
+where
+\begin{equation*}
+M_i = arg \mathop{min}_{M_i'} \{L(M_i')+L(S_i|M_i')\}
+\end{equation*}
+and represents the code Length of the Local Model (LLM).
+Due to theorem~2 in~\cite{Kiernan:constructing}, the above formulation
+can be computed using dynamic programming in polynomial time. The dynamic programming can
+be described through two recurrence relations --
+the global recurrence (LGM) and the interleaved local recurrence (LLM) equation.
+
+\begin{equation}
+LGM(S[1,i])= \mathop{min}_{1 \leq j \leq i} \{LGM(S[1,j])+LLM(S[j+1,i])\}
+\label{eq:rec}
+\end{equation}
+
+
+%%TODO: bit
+% \paragraph{Global Model Code Length}
+% %% TODO: eq:lgm reference does not show up properly
+% %% 
+% On Formula (\ref{eq:lgm}) we defined the code length to describe the global model as LGM. The information that we need to describe the global model is the cuts of the segmentation that will partition $S$ into $k$ segments, $S=(S_1, S_2, ..., S_k)$ where $0<k \leq n$. Because there are $n$ possible cuts, we need $k \log {n}$ bits to describe the global model. We can see how MDL will try to find a balance selecting simpler models with a better fit. So the total code length of the global model will be
+% \begin{equation}
+% LGM(S,M) = k \log{n}+\sum_{i=1}^{k}L(S_i|M_i)
+% \label{eq:lgm2}
+% \end{equation}
+
+% Remember that the local model $M_i$ partitions the different types of events in $S_i$ into $\ell$ groups $\{X_{1},\dots,X_{\ell}\}$ such that $X_{j} \subseteq S$, where $S=\{T_1, T_2, ...,T_m\}$ and $X_{j} \cap X_{j'}=\emptyset$ for every $j \neq j'$ and $1\leq j, j' \leq \ell$. 
+
+%%TODO: Put the ordering theorem here
+
+\subsection{Generalization to discrete-valued event sequences}
+\label{sec:poisson}
+Our work generalizes the above approach for  discrete-valued event sequences.
+This is non-trivial, primarily due to following two reasons -- 
+First, there is no straightforward extension of the generative model used for bv event sequences for dv event sequences. For bv event sequence, the generative model is a single random variable with probability  equal to $\rho$  -- the mean   over the number of occurrences of the events in the time segment. In other words, this is a binomial distribution with mean $t * \rho$ where $t$ is the length of the sequence.
+This formulation guarantees that the value $\rho$ %%TODO: expand in terms of the notations
+is always less than 1. In addition,
+it can be shown that  this binomial distribution happens to be the one with
+least cost distribution for that  event-block among all the choices
+  for binomial distribution. 
+  %% TODO: give formulation
+  In contrast, for the discrete-valued model, the mean of the event sequence can be greater than 1, which makes direct
+  application of the previous approach infeasible.  Naive normalization also breaks down for similar reason. 
+   %%TODO: there should me more reasons why this doesn't work
+ %TODO: I didn't follow this paragraph
+ %%TODO: definition of discerete-valued time series, segments,
+ %%cite this : https://www.crcpress.com/Handbook-of-Discrete-Valued-Time-Series/Davis-Holan-Lund-Ravishanker/p/book/9781466577732
+  
+  
+We describe our approach for summarizing discrete-valued
+signals which builds upon the event summarization
+described in the previous section.
+The summarization as before will produce segments along
+the time domain and for each segment define a grouping
+over the signals  such that such that signals in the same
+group behave ``similarly'' during that time segment.
+In order to extend the global/local dynamic programming for
+dv signals, the following constituents are necessary:
+an ordering function that
+given a signal-block  over time period $I$,
+imposes a linear ordering of the signals in $S_i$.
+Additionally,  a system of models (or distribution functions)  is required for any given signal-group alongwith the
+metric to capture 
+the goodness of a specific model with respect to the signal group.
+Finally, a mechanism to derive an optimal model among the all the possible models for the signal group is required.
+
+
+We begin with our approach to define linearity over 
+signal block $S[I]$ for any given time interval $I$.
+It can be seen as a projection from $|I|$ dimensional
+space to  one dimensional space. 
+The  linearity function captures domain level
+similarity  of the signals. 
+There are several ways to define linearity over signals
+and over time series in general.
+The most commonly used similarity measures tend to capture
+the similarity in the trend (or movement) of the signals.
+However, in this work we use a different measure for similarity
+for dv-signals. The measure compares the sum of the values
+during the segment as oppose to comparing the movement over time.
+%i.e.,
+%\begin{eqnarray*}
+%Sim(S_i[I], S_j[I]) = \sum_{t \in I} S_i(t)  - \sum_{t \in I} S_j(t)
+%\end{eqnarray*}
+%The semantics of this measure is that it compares of total case counts where
+%the definition of ``cases'' varies from application to application.
+%As an example, in the application domain of  disease survellaince,
+%the dv-signals could be number of admitted malaria patients by week for
+%each state of U.S.
+%The above measure, hence, will  compare total number people admitted
+%during time period $I$, across two counties.
+
+Next, we define the domain of the generative  models $\mathcal M$ for $S[I]$ alongwith
+with a cost fuction. The cost function captures the goodness of the model.
+We will then derive a mechanism to obtain an optimal cost model $M$ from $\mathcal M$
+for any signal-group $X$ of $S[I]$.
+In our approach, any model $M(x,\lambda)\in \mathcal M$
+is defined as an outcome of $x$ times an event occurs in an interval with the average number of events, designated as $\lambda$.
+
+%Now, focusing on the data of a segment $S_i$, over interval $I$. The local model $M_i$ partition the rows in $S_i$ by grouping the signals into $\ell$ groups $X_{i1},...,X_{i\ell}$, such that $X_{ij} \subseteq \epsilon$ where $1\leq j \leq \ell$. Each occurrence of an event is a success and $n(E,I)$ gives the number of successes for the event E in interval $I$. Each event in $X_{ij}$ has a number of trials that we called $k_{coins}$. Let $n(E,I)=Y_1+Y_2+...+Y_{k_{coins}*|I|}$ be the total number of successes in $k_{coins}*|I|$ trials per event. 
+
+%%TODO: Urgent: proof the p is optimal.
+%For any fixed $\lambda$, the optimal model $M$ is the one with
+%$$\lambda(S_i) = \sum_{i \in [1:nS]} n(S_i,I) =\mathbb{E}[S_j]$$
+
+% $p(c)$ in $X_{ij}$ will be the probability of seeing an event of any type in $X_{ij}$ during the segment $S_i$. The parameter $p(X_{ij})$ will describe each group $X_{ij}$. $$p(X_{ij})=\sum_{E \in X_{ij}}\frac{n(E,I)}{k_{coins}*|X_{ij}|*|I|}$$
+
+% If $T$ is the sum of the frequency of events in $X_{ij}$. $$T=\sum_{E \in X_{ij}}n(E,I)=Y_1+Y_2+...+Y_{k_{coins}*|I|*|X_{ij}|}$$
+% Using the linearity of expectation, we see that 
+% \begin{eqnarray*}
+% E[T]=&E[Y_1+Y_2+...+Y_{k_{coins}*|I|*|X_{ij}|}]\\
+% =&p+p+...+p\\
+% =&k_{coins}*|X_{ij}|*|I|*p
+% \end{eqnarray*}
+% The expected number of successes in $k_{coins}(X_{ij})$ trials is $k_{coins}(X_{ij}) p$. Our constraint for each group $X_{ij}$ in $S_i$ will be 
+% \begin{eqnarray}
+% k_{coins}(X_{ij}) p(X_{ij})=\frac{\sum\limits_{E \in X_{ij}}n(E,I)}{|X_{ij}|*|I|}
+% \label{eq:cons}
+% \end{eqnarray}
+
+\subsubsection{Poisson model for count data}
+Our model focuses on the number of occurrences of an event within a fixed period. Our counts are non-negative integers. The Poisson distribution is often used for this type of data. It can provide useful insights that cannot be obtained from standard linear regression models. In the data we analyze events occur randomly and uniformly in time. These events occur with a known average. Let $X$ be the number of events occurring in a fixed period of time $I$. For example, let $\sum\limits_{E \in X_j}{n(E,I)}$ be the number of occurrences of the events in a cluster $X_j$ in the interval $I$, then $\sum\limits_{E \in X_j}\frac{n(E,I)}{|X_j|}$  is the average number of event occurrences. This intensity parameter $\lambda$ represents the expected number of occurrences in a fixed period of time, $\lambda=E[X_j]$. We want to determine the effect of changes in event clusters on the average count. 
+
+\subsection{Model Code Length}
+The local model $M_i$ partition the rows in $S_i$ by grouping the event types into $\ell$ groups $X_1,...,X_\ell$, where $1\leq j \leq \ell$. Each group $X_j$ is described by $\lambda(X_j)$; the average number of events of any event type in $X_j$ within the segment $S_i$. 
+%$$\lambda(X_j)=\sum_{E \in X_j}\frac{n(E,I)}{|X_j|}.$$
+
+To describe $\lambda_{d}(X_j)$ we divide $\lambda(X_j)$  by the number of days in the interval, with this the daily average number of events will be 
+$$\lambda_{d}(X_j)=\sum_{E \in X_j}\frac{n(E,I)}{|X_j|I}.$$
+
+Because we want to model the number of events $n(E,I)$ occurring within a given time interval, for $n(E,I)=0,1,2....$ we will use the Poisson distribution.
+Assuming independence of occurrences and event types the probability of $n(E,I)$ events occurring in $X_j$ within the segment $S_i$ is $$P_{\lambda}(n(E,I))=I e^{-\lambda_{d}(X_j)}\frac{\lambda_{d}(X_j)^{\frac{n(E,I)}{I}}}{\frac{n(E,I)}{I}!}.$$ The probability of data $S_i$ given $M_i$ is $Pr(S_i\mid M_i)$. 
+ \begin{eqnarray*}
+    Pr(S_i|M_i)
+     =\prod_{j=1}^{\ell}\prod_{E \in X_j} I e^{-\lambda_d(X_j)}\frac{\lambda_d(X_j)^{\frac{n(E,I)}{I}}}{\Big(\frac{n(E,I)}{I}\Big)!}
+ \end{eqnarray*}
+ 
+The number of bits to encode an event with probability $p$ is $-log(p)$. The number of bits required to describe data $S_i$ given model $M_i$ is $-\log(Pr(S_i\mid M_i))$. 
+    \begin{eqnarray}
+    LD(S_i\mid M_i)
+  & = &
+-\log{Pr(S_i\mid M_i)} \nonumber\\
+  & = &
+  \sum_{j=1}^{\ell}\sum_{E \in X_j}\Big[I \lambda_d(X_j)-n(E,I) \log \lambda_d(X_j) \nonumber \\
+  &  &
+   +I \log{\Big(\Big(\frac{n(E,I)}{I}\Big)!\Big)\Big]}
+  \label{eq:ldcost}
+  \end{eqnarray}
+  
+We want to use the optimal parameter $\lambda_d(X_j)$ that minimizes LD for the local model $M_i$. Each group contributes to the data cost with the following function
+  \begin{eqnarray}
+  F(\lambda_d(X_j))
+   & = &
+   \sum_{E \in X_j}\Big(I \lambda_d(X_j)-n(E,I) \log \lambda_d(X_j) \nonumber\\
+   & &
+   +I \log{\Big(\Big(\frac{n(E,I)}{I}\Big)!\Big)\Big]}
+     \label{eq:fpj}
+ \end{eqnarray}
+ 
+We can see that (\ref{eq:fpj}) is a function of $\lambda_d(X_j)$. To find the value of $\lambda_d(X_j)$ that minimizes $LD(S_i\mid M_i)$ we need to find the value of $\lambda_d(X_j)$ for which the first derivative of $F(\lambda_d(X_j))$ with respect to $\lambda_d(X_j)$ becomes equal to 0.
+  \begin{eqnarray*}
+    F'(\lambda_d(X_j))
+  & = &
+  \sum_{E \in X_j}\Big(I- \frac{n(E,I)}{\lambda_d(X_j)}\Big)
+  \end{eqnarray*}
+  
+  The value of $\lambda_d(X_j)$ for which $F'(\lambda_d(X_j))$ is equal to 0 is $$\lambda_d(X_j)=\sum_{E \in X_j}\frac{n(E,I)}{|X_j| I}$$
+  
+\subsubsection{Bits to encode the local model}
+
+After defining how our data will be described by each model we need to define the number of bits to encode the model $M_i$. For every group $X_j$ where $1 \leq j \leq \ell$ we need $m \log m$ bits to identify the ordering of the events of the proposed clusters. In the same way, we need $\ell \log m$ bits to identify the $\ell$ partition points on this fixed order, giving us the number of events per cluster. We also need $I * \ell \log m$ bits to describe the value of $\lambda_d(X_j)$ for each cluster. The local model cost for $M_i$ will be
+\begin{equation*}
+L(M_i) =  m\log m + \ell \log m + I * \ell \log m
+\end{equation*}
+
+\subsubsection{Bits to encode the global model}
+
+On Formula \ref{eq:lgm}  we defined the code length to describe the global model as LGM. 
+The information that we need to describe the global model $M$ is the cuts of the segmentation that will partition S into $k$ segments, $S = (S_1, S_2, ..., S_k )$ where $0 < k \leq n$. Because there are $n$ possible cuts, we need $k \log n$ bits to describe the global model. We can see how MDL will try to find a balance selecting simpler models with a better fit, so $L(M) =  k \log n$.
+%\begin{equation*}
+%
+%\end {equation*}
+
+
+
+
+
+
+

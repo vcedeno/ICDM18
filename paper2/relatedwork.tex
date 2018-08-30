@@ -1,0 +1,34 @@
+\section{Related Work}
+Event summarization is closely related to sequential pattern and frequent episode mining. 
+\subsection{Sequential pattern mining}
+The sequential pattern mining problem was first introduced by Agrawal et al \cite{Agrawal:1995}, where Apriori based methods are used to mine frequent subsequences patterns from a sequence database. The main focus is on the patterns present on different transactions considering their sequential order. The output is frequent event subsequences with occurrence frequency bounded by a given threshold.  Alternatives to the method in \cite{Agrawal:1995} have been proposed and can be classified in Apriori-based 
+\cite{Garofalakis:1999,Zaki:2001,Ayres:2002} 
+%\cite{Srikant:1996,Garofalakis:1999,Zaki:2001,Ayres:2002} 
+and pattern-growth based 
+\cite{jianpei:2004,Pei:2007} 
+%\cite{Han:2000,jianpei:2000,jianpei:2004,Pei:2007} 
+algorithms. A limitation of these previous algorithms is that they don't provide a global description or 
+%attempt to 
+summarize redundant patterns. 
+%Also, finding patterns is more complicated for sequences than for item sets.
+\subsection{Frequent episode mining}
+Frequent episode mining finds temporal patterns in event sequences. An episode is defined as a collection of events that occur relatively close to each other with respect to a timeline. In 
+%\cite{Mannila1997,Achar2012,Achar:2013,Patnaik:2012} 
+\cite{Mannila1997,Patnaik:2012} 
+given a window size $w$ an episode containing an event pattern is frequent if it's frequency is bounded by a given threshold. As with the sequential pattern mining, frequent episode mining does not provide a global view of the event sequence. Also, parameters like the window size $w$ and thresholds have to be defined. 
+\subsection{Frequent item set summarization}
+To tackle the limitations of frequent item set mining, like redundancy and interpretability, frequent item set summarization has been proposed. The pattern profile method \cite{Yan:2005} aims to summarize the frequent patterns. K clusters contain the set of frequent patterns. Each cluster is described by a pattern profile. Based on the restoration error, a quality measure function determines the optimal value of parameter K. Also, the Markov Random Field method (MRF) \cite{Wang:2006}, for frequent item set summarization, models the items in the dataset as random variables. A MRF on these variables is constructed based on frequent itemsets and their occurrence statistics. We can see how these summarization methods focus on transaction type data and usually the time information is not considered.
+\subsection{Event summarization}
+Even summarization methods present summaries that consider the temporal dynamics of the events. Naturally temporal, events are generally stored as logs and overlooking the time dimension has severe implications in evaluating design decisions. Different methods of event summarization can be classified between two categories frequency change \cite{Kiernan:constructing,wang:algo} and temporal dynamics \cite{jiang:natural,Peng:2007,Schneider:2010,Tatti:2012}. Our model uses a frequency change approach providing a segmentation model. Each segment is described by a local model where the event types are grouped and clustered by frequency similarity. The temporal dynamics approach intents to reveal how the sequence changes over time. Our model does this through the temporal dynamics among the events in a segment and by selecting relevant segments with the minimum cost for description. %Because we want our algorithm to be parameter free, MDL \cite{Grunwald:2007} is at the core of our model by selecting the segments in the timeline and their local models that minimize the encoding length of the data without loosing accuracy in the description.
+\subsection{Minimum Description Length}
+The MDL approach is a generic technique that has been used in sequential pattern mining for problems like clustering \cite{slim:2012}, missing value estimation \cite{Vreeken:2008} and anomaly detection \cite{Vreeken2011,Chakrabarti:1998}. MDL has also been used for event summarization \cite{Kiernan:constructing,wang:algo,jiang:natural,Tatti:2012} but our work is the first in using MDL for generalization for any event summarization method describing bv event sequences to be extended to dv event sequences.
+\subsection{Time series segmentation}
+At a high level our model relates to the problem of time series segmentation 
+\cite{Keogh:2001,Karras:2007,Guo:multi}. 
+%\cite{Keogh:2001,Keogh93,Karras:2007,Guha:2001,terzi:2006,Liu:novel,Guo:multi}. 
+The segmentation problem can be defined as the best representation given a time series $T$ using the parameter $k$ segments. 
+%Also, it can be defined as the best representation given a time series $T$ such that the maximum error for any segment does not exceed some specified threshold. 
+%In the same way 
+Also, it can be defined as the best representation given a time series $T$ such that the combined error for all the segment does not exceed some specified threshold. This work is not parameter free, for example usually a threshold and the size of the time window needs to be defined.  While some work uses MDL to segment time series by providing a parameter-free approach \cite{xu:2013,Hu2015} we are focusing in event sequences and not time series. 
+%Also, to solve the volume and dimensionality problem in time series, many research has proposed alternatives for a higher-level representation. For example, the Discrete Fourier Transform (DFT) \cite{agrawal:similarity}, Discrete Wavelet Transform (DWT) \cite{chan:dwt} and Singular Value Decomposition (SVD) \cite{korn:svd}. However, one drawback with respect to analyzing log data is that the dimensionality reduction based approach looks for global correlation and therefore are more suitable for finding similar images and shapes than data that have time component and local correlations.
+

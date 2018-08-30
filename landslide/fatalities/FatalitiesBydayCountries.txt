@@ -1,0 +1,103 @@
+id,Country
+1,Afghanistan
+2,Algeria
+3,Argentina
+4,Armenia
+5,Australia
+6,Austria
+7,Azerbaijan
+8,Bangladesh
+9,Bhutan
+10,Bolivia
+11,Bosnia and Herzegovina
+12,Brazil
+13,Brunei
+14,Bulgaria
+15,Burkina Faso
+16,Burundi
+17,Cambodia
+18,Canada
+19,Chile
+20,China
+21,Colombia
+22,Costa Rica
+23,Democratic Republic of the Congo
+24,Dominica
+25,Dominican Republic
+26,East Timor
+27,Ecuador
+28,Egypt
+29,El Salvador
+30,Ethiopia
+31,Fiji
+32,France
+33,Gabon
+34,Georgia
+35,Germany
+36,Ghana
+37,Greece
+38,Guatemala
+39,Guinea
+40,Haiti
+41,Honduras
+42,Hong Kong
+43,India
+44,Indonesia
+45,Ireland
+46,Israel
+47,Italy
+48,Ivory Coast
+49,Jamaica
+50,Japan
+51,Jordan
+52,Kenya
+53,Kyrgyzstan
+54,Laos
+55,Lebanon
+56,Madagascar
+57,Malaysia
+58,Mexico
+59,Mongolia
+60,Morocco
+61,Myanmar [Burma]
+62,Nepal
+63,New Zealand
+64,Nicaragua
+65,Nigeria
+66,North Korea
+67,Norway
+68,Pakistan
+69,Panama
+70,Papua New Guinea
+71,Peru
+72,Philippines
+73,Portugal
+74,Russia
+75,Rwanda
+76,Saint Lucia
+77,Saint Vincent and the Grenadines
+78,Saudi Arabia
+79,Sierra Leone
+80,South Africa
+81,South Korea
+82,Spain
+83,Sri Lanka
+84,Sudan
+85,Swaziland
+86,Switzerland
+87,Taiwan
+88,Tajikistan
+89,Tanzania
+90,Thailand
+91,Trinidad and Tobago
+92,Turkey
+93,Uganda
+94,Ukraine
+95,United Kingdom
+96,United States
+97,Uzbekistan
+98,Vanuatu
+99,Venezuela
+100,Vietnam
+101,Yemen
+102,Zambia

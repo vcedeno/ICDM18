@@ -1,0 +1,142 @@
+id,Country
+1,Afghanistan
+2,Albania
+3,Algeria
+4,American Samoa
+5,Angola
+6,Argentina
+7,Armenia
+8,Australia
+9,Austria
+10,Azerbaijan
+11,Bangladesh
+12,Barbados
+13,Belize
+14,Bermuda
+15,Bhutan
+16,Bolivia
+17,Bosnia and Herzegovina
+18,Brazil
+19,Brunei
+20,Bulgaria
+21,Burkina Faso
+22,Burundi
+23,Cambodia
+24,Cameroon
+25,Canada
+26,Chile
+27,China
+28,Colombia
+29,Costa Rica
+30,Croatia
+31,Cuba
+32,Czech Republic
+33,Czechia
+34,Democratic Republic of the Congo
+35,Dominica
+36,Dominican Republic
+37,East Timor
+38,Ecuador
+39,Egypt
+40,El Salvador
+41,Ethiopia
+42,Fiji
+43,France
+44,Gabon
+45,Georgia
+46,Germany
+47,Ghana
+48,Greece
+49,Grenada
+50,Guam
+51,Guatemala
+52,Guinea
+53,Haiti
+54,Honduras
+55,Hong Kong
+56,Iceland
+57,India
+58,Indonesia
+59,Iran
+60,Ireland
+61,Isle of Man
+62,Israel
+63,Italy
+64,Ivory Coast
+65,Jamaica
+66,Japan
+67,Jersey
+68,Jordan
+69,Kazakhstan
+70,Kenya
+71,Kyrgyzstan
+72,Laos
+73,Lebanon
+74,Liberia
+75,Luxembourg
+76,Macedonia
+77,Madagascar
+78,Malawi
+79,Malaysia
+80,Mauritius
+81,Mexico
+82,Mongolia
+83,Montenegro
+84,Morocco
+85,Myanmar [Burma]
+86,Namibia
+87,Nepal
+88,New Zealand
+89,Nicaragua
+90,Nigeria
+91,North Korea
+92,Norway
+93,Oman
+94,Pakistan
+95,Panama
+96,Papua New Guinea
+97,Paraguay
+98,Peru
+99,Philippines
+100,Poland
+101,Portugal
+102,Puerto Rico
+103,Republic of the Congo
+104,Romania
+105,Russia
+106,Rwanda
+107,Saint Kitts and Nevis
+108,Saint Lucia
+109,Saint Vincent and the Grenadines
+110,Saudi Arabia
+111,Serbia
+112,Sierra Leone
+113,Singapore
+114,Slovakia
+115,Slovenia
+116,Solomon Islands
+117,South Africa
+118,South Korea
+119,Spain
+120,Sri Lanka
+121,Sudan
+122,Swaziland
+123,Switzerland
+124,Taiwan
+125,Tajikistan
+126,Tanzania
+127,Thailand
+128,Trinidad and Tobago
+129,Turkey
+130,U.S. Virgin Islands
+131,Uganda
+132,Ukraine
+133,United Arab Emirates
+134,United Kingdom
+135,United States
+136,Uzbekistan
+137,Vanuatu
+138,Venezuela
+139,Vietnam
+140,Yemen
+141,Zambia

@@ -1,0 +1,119 @@
+\section{Theory}
+In this section we introduce the Minimum Description Length (MDL) principle.
+\subsection{MDL}
+The concept of MDL was defined by Rissanen \cite{rissanen:short, rissanen:mdl}. It has its roots in information theory and can be dated back to the concept of the Kolmogorov Complexity and the invariance theorem.
+%, introduced and proved independently by \cite{Kolmogorov65, Chaitin69, Solomonoff64}. 
+
+A formal language is needed to describe a data sequence. For example, a general purpose language. The Kolmogorov Complexity of a sequence, is the length of the shortest computer program that produces the initial sequence as an output. The complexity is the minimal description length. The lower the Kolmogorov complexity of a sequence the more regular it is. 
+If there is a random sequence, the Kolmogorov complexity is close to the entropy.
+
+\textbf{Entropy: } Entropy measures the uncertainty associated with a random variable. The entropy of a random variable $X$ denoted $H(X)$ is a lower bound on the average length of the shortest description of the random variable \cite{cover:book91}. For example the expected value of the information in the message in classical informatics is measured in bits.
+%It will appear that the computer language chosen will influence the result, but the invariance theorem states that if a data sequence $D$ is long enough, it is not fundamental which general purpose computer language is chosen as long as it is general purpose. If we have two general purpose computer language $C_1$ and $C_2$, the length of the shortest program for $D$ written in language $C_1$ and the length of the shortest program for $D$ written in language $C_2$ differ by no more than a constant $c$ independent from the length of $D$.
+The Shannon entropy is an important metric in information theory. It was introduced by C. E. Shannon in \cite{Shannon:1948}. Shannon entropy estimates the average minimum number of bits needed to encode a string of symbols based on an alphabet size and the frequency of the symbols. Is calculated using the following formula $$H(X)=-\sum_{i=1}^{n}p(x_i)log_{2}p(x_i).$$ The Kolmogorov complexity $K$ is approximately equal to the Shannon entropy $H$ if the sequence is drawn at random from a distribution that has entropy $H$. 
+The concept of MDL was proposed to overcome the limitations of the Kolmogorov complexity of a dataset, uncomputability and large constants. There is no computer program, that for any dataset $D$, returns the shortest program that will print $D$. The MDL principle is an approximate estimation of the Kolmogorov complexity. 
+
+\subsubsection{MDL and modeling}
+
+MDL is a method for inductive inference that provides a generic solution for the model selection problem. It is based on the observation that regularities in the data help to learn about the data. The more regularities there are in the data, the more we can compress it and the more we have learned from it. Data are viewed as codes waiting to be compressed by a model. Models are compared by their ability to compress a dataset by recognizing useful information from random noise. 
+
+Classical frequentist and Bayesian methods have the assumption that there is a true probability distribution from which the observed data was sampled, and the statistics models objective is to approximate this underlying true model. But is not possible to verify that the data is a sampled from an imagined population. MDL has a clear interpretation independent of whether or not there exists some underlying true model. For the difficult model comparison task, MDL automatically and quantitatively embodies Occam's razor. The Occam's Razor principle states that between different hypothesis the one with the fewer assumptions must be selected, in other words complex models will not be preferred over simpler models.
+
+The idea of MDL is to represent an entire class of probability distributions as models by a single universal representative model that imitates the behavior of any model in the class \cite{Barron1998}. MDL modeling and inference do not estimate any true data generating distribution, but it searches for good probabilities models for the data, and the best fitted model will the one that allows the shortest coding of the data. 
+
+\subsubsection{Two-part code version of MDL}
+The simplest way to represent MDL, and how we will use it, is as a two part code that takes into account two types of cost. First, the cost of encoding the model and second, the cost of encoding the data given the model. Given a dataset $D$ and a list of candidate models $\mathcal{M}$, it will pick the model, $M \in \mathcal{M}$ that minimizes the encoding length of the data $L(D)=L(M)+L(D|M).$
+
+$L(M)$ indicates the encoding length in bits of the model and $L(D|M)$ indicates the encoding length of describing the data using the model $M$. The equation shows that during the model selection process there is a trade-off between the complexity of the model $L(M)$ and goodness-of-fit on the data $L(D|M)$. Given a list of candidate models $\mathcal{M}$ varying in complexity. A more complex model will involve more parameters describing the model data with greater detail. 
+
+Because MDL is a generic technique, we need to define the models $\mathcal{M}$, how the models $M \in \mathcal{M}$ describe a dataset and how to obtain the code lengths in bits. This will be defined in the next section.
+
+% \subsection{Dynamic Programming}
+% Defined by Richard Belmman in \cite{bellman:dp}, ``programming'' refers to a tabular method that makes a series of choices and ``dynamic'' supports the idea that choices may depend on a current state instead of ahead of time. Dynamic programming is applied to optimization problems where many solutions exists. In our problem we have many options for segmentation and clustering, each one with an specific cost and we want to find the solution with the optimal value. Our problem is suitable for this approach because each substructure is optimal and it has overlapping subproblems. We use a combination of two dynamic programming algorithm defined in the next section. 
+
+% To provide a high level view of how dynamic programming applies to our problem the following example illustrates this. We will call the segmenting of the time dimension our Global Model (GM) and the clustering of the time series in each segment our Local Model(LM). For each dynamic programming algorithm, first we need the recurrence relation to define the value of an optimal solution.
+
+% The following dynamic-programming algorithms in (\ref{eq:1rec}) gives us an optimal solution to the problem, for any interval $I \subset [1,n]$. For every $1 \leq i \leq n$,
+% \begin{equation}
+% GM(S[1,i])= \mathop{min}_{1 \leq j \leq i} \{GM(S[1,j])+LM(S[j+1,i])\}
+% \label{eq:1rec}
+% \end{equation}
+% where
+% \begin{equation*}
+% LM(S[I])=\mathop{min}_{M_{i}'}LM(S[I],M_i')
+% \end{equation*}
+
+% If we have $m$ time series of size $n$ we can cut the time dimension in $2^{n-1}$ ways since each time point can have a cut or not. For example if we have $m$ time series of size $3$,
+% \begin{table}[h]
+% \centering
+% \begin{tabular}{| c  c  c c |}
+%   \hline			
+%   t1 & $x_{1,1}$ & $x_{1,2}$ & $x_{1,3}$\\ 
+%   . & . & . & . \\ 
+%   . & . & . & . \\ 
+%   tm & $x_{m,1}$ & $x_{m,2}$ & $x_{m,3}$\\
+%   \hline  
+% \end{tabular}
+% \label{fig:ex}
+% \end{table}
+% we can cut the time dimension in $4$ ways.\\\\
+% \scalebox{0.8}{
+% \begin{tabular}{|c|cc|}
+%   \hline			
+%   $S_{1}$ &$S_{2}$ & $S_{3}$\\ \hline
+% \end{tabular}
+% \enskip
+% \begin{tabular}{| c c | c |}
+%   \hline			
+%   $S_{1}$ &$S_{2}$ & $S_{3}$\\ \hline
+% \end{tabular}
+% \enskip
+% \begin{tabular}{| c c c |}
+%   \hline			
+%   $S_{1}$ &$S_{2}$ & $S_{3}$\\ \hline
+% \end{tabular}
+% \enskip
+% \begin{tabular}{| c | c | c |}
+%   \hline			
+%   $S_{1}$ &$S_{2}$ & $S_{3}$\\ \hline
+% \end{tabular}
+% }
+% \\\\ Suppose we have the following costs for the segments,
+% $$S_{\{1\}}=2, S_{\{2\}}=3, S_{\{3\}}=2, S_{\{1,2\}}=1, S_{\{2,3\}}=3, S_{\{1,2,3\}}=9$$
+% we need the tabular computation for computing the value of an optimal solution, and finally the traceback for delivering an optimal solution. The global model dynamic programming algorithm is going to be solved in the following manner. In a bottom up manner we solve each subproblem once. 
+
+
+% \begin{figure}[h]
+% \centering
+% \begin{tikzpicture}[
+% mynode/.style={
+%   draw,
+%   minimum size=1em
+%   },
+% every loop/.append style={-latex},  
+% start chain=going right  
+% ]
+% \foreach \Value in {1,...,3}
+%   \node[mynode,on chain] (s\Value) {$S_{\Value}$};
+% \path[-latex]
+%   (s2) edge[bend right] node[auto,swap,font=\small] {} (s1)
+%   (s3) edge[bend right] node[auto,swap,font=\small] {} (s2)
+%     (s3) edge[bend right] node[auto,swap,font=\small] {} (s1);
+% \end{tikzpicture}
+% \\
+%     \begin{tabular}{ c  c  c c  c c c  c }			
+%   $\uparrow2$ &  &   & \quad5&  &  & $\uparrow3$ &\\ 
+%   &  &  &$\uparrow1$& &  & 5 &\\ 
+%   &  &  &  & &  & 9 &\\
+% \end{tabular} 
+% \caption{Tabular computation and traceback for delivering an optimal solution with a dynamic programming algorithm.}
+% \label{fig:dpex}
+% \end{figure}
+
+% Figure \ref{fig:dpex} shows how we obtain the minimum cost for each segment size and keeping a pointer to the optimal cut helps the traceback deliver the solution. In figure \ref{fig:dpex}, segment $3$ shows that the minimal cost for a size $3$ segment is $3$. To obtain the optimal cuts, segment $3$ pointer says the first cut should be of size $1$, this leaves us with a segment of size 2. Segment $2$ pointer says the next cut should be of size $2$, this leaves us with a segment of size 0 and the final cut. The optimal solution is $\{S1,S2\}\{S3\}$ with cost 3.
+
+% At each time dimension cut we have to do the same analysis to obtain the minimum local model cost for the time series clustering. In the next section we explain how we can do this in polynomial time for our stated problem.
+
+
+
+
+

@@ -1,0 +1,155 @@
+\relax 
+\citation{Kiernan:constructing}
+\@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces The raw data in the top figure shows a timeline by day, from 1 to 160. Each dot in the raw data, represents a daily event frequency from 150 events. These events follow group patterns identified by the Slice-and-cluster summarization in the bottom figure. The output of the summarization is, first, the segmentation of the time dimension \{1-15, 16-25, 26-45, 46-70, 71-80, 81-160\} and second, the local clusters for each of these time segments. Each local cluster is a list of events id's that form part of the cluster and the summarization is a daily rate. Because this is synthetic data we know the list of events that conforms a pattern, and the algorithm accurately detects them. For visual aid the local clusters are represented by a color box of the pattern an event belongs to, if the events are all from different patterns but can be represented by the same daily rate the color boxes are combined. }}{1}}
+\newlabel{fig:intro}{{1}{1}}
+\citation{Kiernan:constructing,wang:algo}
+\citation{jiang:natural,Peng:2007,Schneider:2010,Tatti:2012}
+\citation{Kiernan:constructing}
+\citation{wang:algo}
+\citation{Kiernan:constructing}
+\citation{jiang:natural}
+\citation{Kiernan:constructing,wang:algo,jiang:natural}
+\citation{Kiernan:constructing}
+\citation{wang:algo,jiang:natural}
+\citation{Peng:2007}
+\citation{Schneider:2010}
+\citation{Aharon:2009}
+\citation{Tatti:2012}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {I-A}}Our approach}{2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {I-B}}Contributions}{2}}
+\citation{Lam:2014}
+\@writefile{toc}{\contentsline {section}{\numberline {II}Notation and Problem Statement}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {II-A}}Notation}{3}}
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Notation}}{3}}
+\newlabel{tab:notation}{{I}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {II-B}}Problem Statement}{3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Visual representation of our event sequence summarization. Here n=30 and m=3. The model cuts the timeline in [1,8] grouping $\{E_1,E_2\}\{E_3\}$. Then cuts [9,17] grouping $\{E_1,E_3,E_2\}$. Finally it cuts [18,30] grouping $\{E_1\}\{E_3,E_2\}$.}}{3}}
+\newlabel{fig:cuts}{{2}{3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {II-C}}Challenges}{3}}
+\citation{rissanen:short,rissanen:mdl}
+\citation{cover:book91}
+\citation{Shannon:1948}
+\citation{Barron1998}
+\citation{Kiernan:constructing}
+\citation{Kiernan:constructing}
+\@writefile{toc}{\contentsline {section}{\numberline {III}Theory}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-A}}MDL}{4}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {III-A}1}MDL and modeling}{4}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {III-A}2}Two-part code version of MDL}{4}}
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Approach}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {IV-A}}The global/local method for the summarization of binary valued event sequence}{4}}
+\citation{Kiernan:constructing}
+\@writefile{toc}{\contentsline {paragraph}{\numberline {\unhbox \voidb@x \hbox {IV-A}0a}Optimal summarization through dynamic programming}{5}}
+\newlabel{eq:lgm}{{1}{5}}
+\newlabel{eq:rec}{{2}{5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {IV-B}}Generalization to discrete-valued event sequences}{5}}
+\newlabel{sec:poisson}{{\unhbox \voidb@x \hbox {IV-B}}{5}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {IV-B}1}Poisson model for count data}{5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {IV-C}}Model Code Length}{5}}
+\citation{Lam:2014}
+\citation{Kiernan:constructing}
+\newlabel{eq:ldcost}{{3}{6}}
+\newlabel{eq:fpj}{{4}{6}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {IV-C}1}Bits to encode the local model}{6}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {IV-C}2}Bits to encode the global model}{6}}
+\@writefile{toc}{\contentsline {section}{\numberline {V}Detailed Optimal Solution}{6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {V-A}}Segmentation Algorithm}{6}}
+\newlabel{eq:lgm2}{{5}{6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {V-B}}Time complexity}{6}}
+\newlabel{sec:time}{{\unhbox \voidb@x \hbox {V-B}}{6}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {V-B}1}Compressing Patterns Problem}{6}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {V-B}2}Optimal global model}{6}}
+\citation{bellman:dynamic}
+\citation{Kiernan:constructing}
+\citation{VENKATRAMANAN:2018}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {V-B}3}Optimal local modeling}{7}}
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Experimental Evaluation}{7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VI-A}}Synthetic Data}{7}}
+\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Experiments Notation}}{7}}
+\newlabel{tab:expNotation}{{II}{7}}
+\@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces Summarization accuracy for synthetic dataset, $n=250$, $m=150$, $p=20$, $c=50$, $e=50$}}{7}}
+\newlabel{tab:syn1000}{{III}{7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VI-B}}Real Data}{7}}
+\newlabel{sec:realdata}{{\unhbox \voidb@x \hbox {VI-B}}{7}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {VI-B}1}Summarization of Ebola Virus Disease cases}{7}}
+\citation{Kirschbaum:2010}
+\citation{Kirschbaum:2010}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces When the noise increases, the compression ratio increases. Lower value of CR is preferred.}}{8}}
+\newlabel{fig:crnoise}{{3}{8}}
+\newlabel{fig:noise}{{3}{8}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces When number of patterns increase, the compression ratio decreases. n=50, m=150, e=25}}{8}}
+\newlabel{fig:addpatterns}{{4}{8}}
+\newlabel{fig:pattern}{{4}{8}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces For each model in Table III\hbox {} we generated 100,000 random models with a random assignment of cuts for segments and local clusters. Red dots represents the optimal code length for each dataset found by our optimization algorithm.}}{8}}
+\newlabel{fig:random}{{5}{8}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Recorded weekly cases of Ebola infections for 15 counties in Liberia. Here, each county is a colored event sequence. The algorithm segments the time on week 13 and the local clusters, presented in Table IV\hbox {}, tell a story consistent with the analysis made by experts in the field of epidemiology. }}{8}}
+\newlabel{fig:ebola}{{6}{8}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {VI-B}2}Summarization of Global Landslides}{8}}
+\@writefile{lot}{\contentsline {table}{\numberline {IV}{\ignorespaces Summarization of Ebola virus disease confirmed cases in Liberia, 2015.}}{8}}
+\newlabel{tab:ebola}{{IV}{8}}
+\@writefile{lot}{\contentsline {table}{\numberline {V}{\ignorespaces Summarization of Fatalities by landslides from the Global Landslide Catalog, from 01/01/2007 to 10/25/2016.}}{8}}
+\newlabel{tab:landslide}{{V}{8}}
+\citation{Kirschbaum:2010}
+\citation{Agrawal:1995}
+\citation{Agrawal:1995}
+\citation{Garofalakis:1999,Zaki:2001,Ayres:2002}
+\citation{jianpei:2004,Pei:2007}
+\citation{Mannila1997,Patnaik:2012}
+\citation{Yan:2005}
+\citation{Wang:2006}
+\citation{Kiernan:constructing,wang:algo}
+\citation{jiang:natural,Peng:2007,Schneider:2010,Tatti:2012}
+\citation{slim:2012}
+\citation{Vreeken:2008}
+\citation{Vreeken2011,Chakrabarti:1998}
+\citation{Kiernan:constructing,wang:algo,jiang:natural,Tatti:2012}
+\citation{Keogh:2001,Karras:2007,Guo:multi}
+\citation{xu:2013,Hu2015}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VI-C}}Results and Discussion}{9}}
+\@writefile{toc}{\contentsline {section}{\numberline {VII}Related Work}{9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VII-A}}Sequential pattern mining}{9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VII-B}}Frequent episode mining}{9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VII-C}}Frequent item set summarization}{9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VII-D}}Event summarization}{9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VII-E}}Minimum Description Length}{9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {VII-F}}Time series segmentation}{9}}
+\bibstyle{IEEEtran}
+\bibdata{sample-bibliography}
+\bibcite{Kiernan:constructing}{1}
+\bibcite{wang:algo}{2}
+\bibcite{jiang:natural}{3}
+\bibcite{Peng:2007}{4}
+\bibcite{Schneider:2010}{5}
+\bibcite{Tatti:2012}{6}
+\bibcite{Aharon:2009}{7}
+\bibcite{Lam:2014}{8}
+\bibcite{rissanen:short}{9}
+\bibcite{rissanen:mdl}{10}
+\bibcite{cover:book91}{11}
+\bibcite{Shannon:1948}{12}
+\bibcite{Barron1998}{13}
+\bibcite{bellman:dynamic}{14}
+\bibcite{VENKATRAMANAN:2018}{15}
+\bibcite{Kirschbaum:2010}{16}
+\bibcite{Agrawal:1995}{17}
+\bibcite{Garofalakis:1999}{18}
+\bibcite{Zaki:2001}{19}
+\bibcite{Ayres:2002}{20}
+\bibcite{jianpei:2004}{21}
+\bibcite{Pei:2007}{22}
+\bibcite{Mannila1997}{23}
+\bibcite{Patnaik:2012}{24}
+\bibcite{Yan:2005}{25}
+\bibcite{Wang:2006}{26}
+\bibcite{slim:2012}{27}
+\bibcite{Vreeken:2008}{28}
+\bibcite{Vreeken2011}{29}
+\bibcite{Chakrabarti:1998}{30}
+\bibcite{Keogh:2001}{31}
+\bibcite{Karras:2007}{32}
+\bibcite{Guo:multi}{33}
+\bibcite{xu:2013}{34}
+\bibcite{Hu2015}{35}
+\@writefile{toc}{\contentsline {section}{\numberline {VIII}Conclusion and Future Work}{10}}
+\@writefile{toc}{\contentsline {section}{References}{10}}

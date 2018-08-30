@@ -1,0 +1,49 @@
+\section{Detailed Optimal Solution}
+In this section we will define our algorithm to obtain the optimal solution, analyze the complexity of the problem and describe how we will use dynamic programming to provide polynomial time algorithms to solve the problem stated.
+
+\subsection{Segmentation Algorithm}
+The global model total description length is minimized when,
+\begin{equation}
+LGM = arg \mathop{min}_{M} \{k \log n +\sum_{i=1}^{k}L(S_i|M_i)\}
+\label{eq:lgm2}
+\end{equation}
+where
+\begin{equation*}
+M_i = arg \mathop{min}_{M_i'} \{ m\log m + \ell \log m + I * \ell \log m +L(S_i|M'_i)\}
+\end{equation*}
+and $L(Si|M'_{i}) = Formula (\ref{eq:ldcost})$
+%\begin{eqnarray*}
+%L(Si|M'_{i}) 
+  %& = & 
+  %\sum_{j=1}^{\ell}\sum_{E \in X_j}\Big[I \lambda_d(X_j)-n(E,I) \log \lambda_d(X_j) \nonumber \\
+  %&  &
+  % +I \log{\Big(\Big(\frac{n(E,I)}{I}\Big)!\Big)\Big]}
+ %\end{eqnarray*}
+ minimizing the local description length of $S_i$.
+
+
+\subsection{Time complexity}
+\label{sec:time}
+\subsubsection{Compressing Patterns Problem}
+Given a sequence $D$, a constraint window condition, a set of candidate patterns $\mathcal{M}=\{M_1, M_2, ..., M_m\}$, find an optimal local model 
+\begin{equation}
+M \ast= arg \mathop{min}_{M} \{L(M)+L(D|M)\}
+\end{equation}
+where $M* \subset \mathcal{M}$.
+
+To solve our compressing pattern problem we need to find the optimal local model and the optimal encoding of the data $D$ with the model $M$. The compressing pattern problem and the optimal local model are NP-Hard \cite{Lam:2014}.
+
+\subsubsection{Optimal global model}
+Formula (\ref{eq:rec}) is a dynamic-programming recursion that for every $i$ where, $1 \leq i \leq n$, needs to go through every $j$ where, $1 \leq j \leq i$, to obtain the value $LGM(S[1,j])+LLM(S[j+1,i])$. $LGM(S[1,j])$ will be a search of an already computed value so the computation that's left to be done is $LLM(S[j+1,i])$. The time required for computing $LGM(S[1,n])$ will depend on the time to evaluate LLM on every time interval, so if this can be computed optimally, formula (\ref{eq:rec}) is also optimal. The running time of formula (\ref{eq:ldcost}) is $O(n^2T_{LLM})$, where $T_{LLM}$ is the running time to evaluate $LLM(S[I])$. 
+
+\subsubsection{Optimal local modeling}
+To show how the local clustering can be solved optimally in polynomial time we will describe the second dynamic-programming algorithm. The optimal grouping assumes an ordering of the event types within a segment in decreasing order of their frequencies.
+
+%\begin{definition}
+From \cite{Kiernan:constructing}, we assume that the frequencies in $S$ are ordered so that $n(T_1,I) \geq n(T_2,I) \geq ... \geq n(T_m,I)$. Assume that the optimal local model $M_i $ constructs $\ell$ groups $X_1, ..., X_{\ell}$. Then if $T_{j1} \in X_{l}$ and $T_{j2} \in X_{l}$ with $j_2 > j_1$, then for all $T_{j'}$'s such that $j' \in \{j_1+1,...,j_2-1\}$ we have that $T_{j'} \in X_l$.
+ %\end{definition}
+ 
+The local Dynamic Programming (DP) algorithm in (\ref{eq:rec}) finds the optimal local model for the data segment $S_i$ in polynomial time. The proof that one dimensional clustering can be done in polynomial time using DP is proven in \cite{bellman:dynamic}.
+
+
+
